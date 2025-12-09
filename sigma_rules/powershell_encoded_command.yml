@@ -1,0 +1,26 @@
+title: Suspicious PowerShell Encoded Command Usage (HUNT-LITE)
+id: huntlite-powershell-encoded-command-001
+description: Detects use of powershell.exe with -EncodedCommand, often used to hide script contents from defenders.
+status: experimental
+author: Warren Kankwe
+date: 2025/12/08
+references: []
+logsource:
+  product: windows
+  service: security
+
+detection:
+  selection:
+    EventID: 4688
+    NewProcessName|endswith: '\powershell.exe'
+    CommandLine|contains:
+      - '-enc '
+      - '-EncodedCommand'
+  condition: selection
+
+level: medium
+tags:
+  - attack.execution
+  - attack.t1059.001
+  - huntlite.scenario1
+
