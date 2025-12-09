@@ -1,0 +1,21 @@
+title: Repeated Network Beaconing Pattern (HUNT-LITE)
+id: huntlite-network-beaconing-003
+description: Detects repeated outbound HTTP requests to the same external IP and URI path at regular intervals, indicative of beaconing.
+status: experimental
+author: Warren Kankwe
+date: 2025/12/10
+references: []
+
+detection:
+  selection:
+    dest_ip: 5.252.153.241
+    http_uri|contains: "/1517696937"
+  timeframe: 2m
+  condition: selection | count() >= 20
+
+level: medium
+tags:
+  - attack.command_and_control
+  - attack.t1071
+  - huntlite.scenario3
+

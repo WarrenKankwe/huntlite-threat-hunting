@@ -17,3 +17,19 @@ Using HUNT-LITE, I formed the hypothesis that repeated authentication failures w
 
 I implemented a Sigma rule that triggers when 5 or more failed logon attempts occur within 2 minutes. This provides a simple, portable detection method for credential-based attacks and aligns with MITRE ATT&CK technique T1110 (Brute Force).
 
+
+## Scenario 3 – Network Beaconing (PCAP Analysis)
+
+In this scenario, I analyzed a packet capture that exhibited strong signs of automated command-and-control (C2) beaconing. Using Wireshark, I focused on DNS activity, HTTP request patterns, and packet timing to identify recurring communication between an internal host and a suspicious external server.
+
+The internal workstation 10.1.17.215 generated a high volume of DNS queries, including long and unusual domain strings that repeated multiple times. This type of DNS noise is commonly associated with malware resolving its controller domains or fallback infrastructure.
+
+The HTTP traffic showed the clearest indicator of beaconing. The host repeatedly sent hundreds of identical GET requests to the external IP 5.252.153.241, specifically requesting the same resource:
+
+`GET /1517096937 HTTP/1.1`
+
+This single repeated URI path — coupled with frequent 404 Not Found responses — is characteristic of C2 check-in behavior, where malware polls a server for instructions at regular intervals. Legitimate applications rarely send an identical request hundreds of times without user interaction.
+
+To validate the hypothesis of beaconing, I reviewed network timing. Using Wireshark’s IO Graphs and the “Delta time displayed” column, I observed that packets to 5.252.153.241 occurred in consistent, predictable intervals, forming a periodic “heartbeat” pattern. Even with normal workstation noise mixed in, the repeated timing stood out clearly in both 1-second and 5-second interval graphs.
+
+Applying the HUNT-LITE framework, I correlated three independent signals—repetitive DNS activity, a dominant repeated HTTP request, and regular timing intervals—to confirm likely beaconing behavior. This scenario demonstrates how early detection can occur before payload execution or lateral movement, making beaconing one of the most important network hunting patterns for SOC analysts.
