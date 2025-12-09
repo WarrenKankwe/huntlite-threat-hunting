@@ -1,0 +1,24 @@
+title: Multiple Failed Logon Attempts (HUNT-LITE)
+id: huntlite-auth-failures-002
+description: Detects multiple failed interactive logon attempts (Event ID 4625), which may indicate brute-force activity.
+status: experimental
+author: Warren Kankwe
+date: 2025/12/10
+references: []
+
+logsource:
+  product: windows
+  service: security
+
+detection:
+  selection:
+    EventID: 4625
+  timeframe: 2m
+  condition: selection | count() >= 5
+
+level: medium
+tags:
+  - attack.credential_access
+  - attack.t1110
+  - huntlite.scenario2
+
