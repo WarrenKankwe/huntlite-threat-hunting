@@ -18,7 +18,6 @@ mkdir -p data/raw
 mkdir -p data/processed
 mkdir -p artifacts
 mkdir -p models
-mkdir -p notebooks
 
 # Google Drive file IDs
 RAW_DATA_ID="1yYBeynz5wzNzPnEwzkt_QQnH3K_IDXxN"
@@ -31,7 +30,6 @@ MODEL_ID="1sPXFJpeN1rNpALNmAYepla-0DhBJ5f97"
 PREPROCESSOR_ID="1KKPl9WovvGWSBfBHA6dtgg2pP14oaeSq"
 FEATURE_INFO_ID="13tXsf2VFudq0s3eMn9hAlVWmlv-LBOMx"
 LABEL_MAPPING_ID="14xpkgZUkd5jQ8rGyj9rpmfJZsnoGmO6k"
-NOTEBOOK_ID="1NVWiE-tIW1dlwbiiosFpyzVhOkzlybMl"
 LABEL_ENCODER_ID="1Y0mNZV7ZdlBjGsKTF0ng5qbrJg9RVtIv"
 
 download_file () {
@@ -57,8 +55,6 @@ download_file () {
         return 1
     fi
 
-    # Prevent Google Drive HTML warning/error pages from being
-    # silently saved as CSV files.
     if [[ "$OUTPUT" == *.csv ]]; then
         if head -c 512 "$TEMP" | grep -qiE '<!DOCTYPE html|<html'; then
             rm -f "$TEMP"
@@ -124,15 +120,12 @@ download_project_assets () {
 
     download_file "$LABEL_ENCODER_ID" \
         "artifacts/label_encoder.joblib"
-
-    download_file "$NOTEBOOK_ID" \
-        "notebooks/huntlite_full_training.ipynb"
 }
 
 echo "Choose what to download:"
 echo "1) Raw data only"
 echo "2) Processed data only"
-echo "3) Project assets only (artifacts, model, notebook)"
+echo "3) Project assets only (artifacts and model)"
 echo "4) Everything"
 
 read -r -p "Enter option [1-4]: " CHOICE

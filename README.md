@@ -237,7 +237,7 @@ The downloader provides four options:
 ```text
 1. Raw data only
 2. Processed data only
-3. Project assets only
+3. Project assets only (model and preprocessing artifacts)
 4. Everything
 ```
 
@@ -273,8 +273,8 @@ artifacts/feature_info.json
 artifacts/label_mapping.json
 artifacts/version_info.json
 artifacts/label_encoder.joblib
-notebooks/huntlite_full_training.ipynb
 ```
+The training notebook is already included in the GitHub repository and does not need to be downloaded separately.
 
 Option 4 - Everything
 
@@ -284,7 +284,6 @@ Downloads:
 - Processed datasets
 - ML artifacts
 - Model
-- Training notebook
 
 For most users who only want to run the application, Option 2 followed by Option 3 is sufficient.
 
