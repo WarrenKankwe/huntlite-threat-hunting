@@ -122,10 +122,10 @@ try:
         df = pd.read_csv(uploaded)
         source_label = uploaded.name
 
-except Exception as exc:
+except Exception:
     st.error(
-        f"Failed to load dataset: "
-        f"{type(exc).__name__}: {exc}"
+        "Failed to load dataset. Verify that the file is a valid, "
+        "readable CSV and try again."
     )
 
 
@@ -577,7 +577,7 @@ if (
             )
         )
 
-    except Exception as exc:
+    except Exception:
         mapping_validation = {
             "ready": False,
             "resolved_count": (
@@ -590,10 +590,8 @@ if (
                 unresolved_fields
             ),
             "errors": [
-                (
-                    f"{type(exc).__name__}: "
-                    f"{exc}"
-                )
+                "Schema mapping could not be validated. Review the selected "
+                "field mappings and data values, then try again."
             ],
             "warnings": [],
         }
@@ -897,15 +895,14 @@ if run_btn:
                 )
             )
 
-        except Exception as exc:
+        except Exception:
             st.session_state.triage_results = (
                 None
             )
 
             st.error(
-                "ML triage failed: "
-                f"{type(exc).__name__}: "
-                f"{exc}"
+                "ML triage could not process this dataset. Verify the mapped "
+            "fields and data values, then try again."
             )
 
 

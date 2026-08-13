@@ -40,3 +40,5 @@ artifacts/
 # Optional local outputs
 outputs/
 reports/generated/
+# Safe environment template for users
+!gui/.env.example
