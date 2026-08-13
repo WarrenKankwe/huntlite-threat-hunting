@@ -229,6 +229,7 @@ def normalize_action(value):
         "accepted",
         "pass",
         "passed",
+        "proxied",
     }
 
     blocked_values = {
@@ -295,6 +296,7 @@ def normalize_log_type(value):
         "web_application",
         "waf",
         "web_application_firewall",
+        "sg_http_service",
     }:
         return "application"
 
