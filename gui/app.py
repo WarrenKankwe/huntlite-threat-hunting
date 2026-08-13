@@ -13,6 +13,13 @@ from core.utils import repo_root_from_gui
 from core.triage_engine import run_triage
 from core.ai_coach import ai_explain
 from core.report_engine import build_record_report, build_case_summary
+from core.schema_mapper import (
+    MODEL_FIELDS,
+    build_mapped_dataframe,
+    suggest_byte_pair,
+    suggest_mapping,
+    validate_mapping,
+)
 
 
 st.set_page_config(
@@ -23,9 +30,10 @@ st.set_page_config(
 st.title("HUNT-LITE: ML-Powered SOC Triage Assistant")
 
 st.caption(
-    "Load processed security records, classify them with the trained "
-    "Keras model, triage suspicious activity, and generate "
-    "beginner-friendly analyst guidance."
+    "Load security records, map compatible external datasets into the "
+    "HUNT-LITE schema, classify them with the trained Keras model, "
+    "triage suspicious activity, and generate beginner-friendly "
+    "analyst guidance."
 )
 
 
@@ -75,8 +83,13 @@ with st.sidebar:
 
     if data_option == "Upload CSV":
         uploaded = st.file_uploader(
-            "Upload processed CSV",
+            "Upload external security CSV",
             type=["csv"],
+            help=(
+                "External datasets must resolve all six "
+                "HUNT-LITE model fields before ML triage "
+                "can run."
+            ),
         )
 
 
@@ -84,15 +97,25 @@ st.divider()
 
 
 df = pd.DataFrame()
+triage_df = pd.DataFrame()
 source_label = ""
+
+mapping_ready = (
+    data_option != "Upload CSV"
+)
+
+mapping_validation = None
+
 
 try:
     if data_option == "Use test sample CSV":
         df = pd.read_csv(DEFAULT_SAMPLE)
+        triage_df = df.copy()
         source_label = str(DEFAULT_SAMPLE)
 
     elif data_option == "Use processed full CSV":
         df = pd.read_csv(DEFAULT_FULL)
+        triage_df = df.copy()
         source_label = str(DEFAULT_FULL)
 
     elif uploaded is not None:
@@ -107,13 +130,21 @@ except Exception as exc:
 
 
 st.subheader("Dataset Preview")
+
 st.write(
     f"**Source:** "
     f"{source_label or 'No source selected'}"
 )
 
 if df.empty:
-    st.info("Load a processed CSV to begin.")
+    if data_option == "Upload CSV":
+        st.info(
+            "Upload an external security CSV to begin."
+        )
+    else:
+        st.info(
+            "Load a processed CSV to begin."
+        )
 
 else:
     st.write(
@@ -132,31 +163,764 @@ else:
     )
 
 
+# ---------------------------------------------------------
+# External Dataset Schema Mapper
+# ---------------------------------------------------------
+
+if (
+    data_option == "Upload CSV"
+    and not df.empty
+):
+    st.divider()
+
+    st.subheader(
+        "External Dataset Schema Mapper"
+    )
+
+    st.write(
+        "Map the external dataset into the six fields required "
+        "by the existing HUNT-LITE ML model."
+    )
+
+    st.info(
+        "ML triage is enabled only when all 6/6 HUNT-LITE "
+        "model fields are explicitly resolved and validated. "
+        "A field may be directly mapped or safely derived."
+    )
+
+    st.caption(
+        "Automatic suggestions are based on known column aliases. "
+        "Review each suggestion before running triage."
+    )
+
+    suggestions = suggest_mapping(
+        df.columns
+    )
+
+    suggested_sent, suggested_received = (
+        suggest_byte_pair(
+            df.columns
+        )
+    )
+
+    source_columns = list(
+        df.columns
+    )
+
+    column_options = [
+        "-- Not mapped --"
+    ] + source_columns
+
+    def selection_index(
+        suggested_column,
+    ):
+        if (
+            suggested_column
+            and suggested_column
+            in source_columns
+        ):
+            return column_options.index(
+                suggested_column
+            )
+
+        return 0
+
+    mapping = {}
+
+    st.markdown(
+        "### Required Field Mapping"
+    )
+
+    left, right = st.columns(2)
+
+    with left:
+        selected_protocol = st.selectbox(
+            "protocol",
+            column_options,
+            index=selection_index(
+                suggestions.get(
+                    "protocol"
+                )
+            ),
+            help=(
+                "Examples: protocol, proto, "
+                "network_protocol, transport_protocol."
+            ),
+        )
+
+        mapping["protocol"] = (
+            None
+            if selected_protocol
+            == "-- Not mapped --"
+            else selected_protocol
+        )
+
+        selected_action = st.selectbox(
+            "action",
+            column_options,
+            index=selection_index(
+                suggestions.get(
+                    "action"
+                )
+            ),
+            help=(
+                "This must represent event or traffic disposition. "
+                "Examples include allowed, blocked, permit, deny, "
+                "drop, or reject."
+            ),
+        )
+
+        mapping["action"] = (
+            None
+            if selected_action
+            == "-- Not mapped --"
+            else selected_action
+        )
+
+        selected_log_type = st.selectbox(
+            "log_type",
+            column_options,
+            index=selection_index(
+                suggestions.get(
+                    "log_type"
+                )
+            ),
+            help=(
+                "Examples include log type, event source, "
+                "sensor, device type, or detection system."
+            ),
+        )
+
+        mapping["log_type"] = (
+            None
+            if selected_log_type
+            == "-- Not mapped --"
+            else selected_log_type
+        )
+
+    with right:
+        selected_user_agent = st.selectbox(
+            "user_agent",
+            column_options,
+            index=selection_index(
+                suggestions.get(
+                    "user_agent"
+                )
+            ),
+            help=(
+                "Examples include user_agent, "
+                "http_user_agent, client_agent, or ua."
+            ),
+        )
+
+        mapping["user_agent"] = (
+            None
+            if selected_user_agent
+            == "-- Not mapped --"
+            else selected_user_agent
+        )
+
+        selected_request_path = st.selectbox(
+            "request_path",
+            column_options,
+            index=selection_index(
+                suggestions.get(
+                    "request_path"
+                )
+            ),
+            help=(
+                "Examples include request_path, URI, URL, "
+                "path, endpoint, or resource. Full HTTP/HTTPS "
+                "URLs can be reduced to path and query."
+            ),
+        )
+
+        mapping["request_path"] = (
+            None
+            if selected_request_path
+            == "-- Not mapped --"
+            else selected_request_path
+        )
+
+    st.markdown(
+        "### bytes_transferred"
+    )
+
+    direct_bytes = suggestions.get(
+        "bytes_transferred"
+    )
+
+    can_derive_bytes = bool(
+        suggested_sent
+        and suggested_received
+    )
+
+    if (
+        direct_bytes is None
+        and can_derive_bytes
+    ):
+        default_byte_mode = 1
+    else:
+        default_byte_mode = 0
+
+    byte_mode = st.radio(
+        "How should bytes_transferred be resolved?",
+        [
+            "Map one source column",
+            "Derive from sent + received columns",
+        ],
+        index=default_byte_mode,
+        horizontal=True,
+    )
+
+    bytes_sent_column = None
+    bytes_received_column = None
+
+    if (
+        byte_mode
+        == "Map one source column"
+    ):
+        selected_bytes = st.selectbox(
+            "bytes_transferred source",
+            column_options,
+            index=selection_index(
+                direct_bytes
+            ),
+        )
+
+        mapping[
+            "bytes_transferred"
+        ] = (
+            None
+            if selected_bytes
+            == "-- Not mapped --"
+            else selected_bytes
+        )
+
+    else:
+        mapping[
+            "bytes_transferred"
+        ] = None
+
+        b1, b2 = st.columns(2)
+
+        with b1:
+            selected_sent = (
+                st.selectbox(
+                    "Bytes sent column",
+                    column_options,
+                    index=selection_index(
+                        suggested_sent
+                    ),
+                )
+            )
+
+            if (
+                selected_sent
+                != "-- Not mapped --"
+            ):
+                bytes_sent_column = (
+                    selected_sent
+                )
+
+        with b2:
+            selected_received = (
+                st.selectbox(
+                    "Bytes received column",
+                    column_options,
+                    index=selection_index(
+                        suggested_received
+                    ),
+                )
+            )
+
+            if (
+                selected_received
+                != "-- Not mapped --"
+            ):
+                bytes_received_column = (
+                    selected_received
+                )
+
+    # -----------------------------------------------------
+    # Explicit 6/6 mapping gate
+    # -----------------------------------------------------
+
+    explicitly_resolved = {
+        "protocol": bool(
+            mapping.get(
+                "protocol"
+            )
+        ),
+        "action": bool(
+            mapping.get(
+                "action"
+            )
+        ),
+        "log_type": bool(
+            mapping.get(
+                "log_type"
+            )
+        ),
+        "user_agent": bool(
+            mapping.get(
+                "user_agent"
+            )
+        ),
+        "request_path": bool(
+            mapping.get(
+                "request_path"
+            )
+        ),
+        "bytes_transferred": (
+            bool(
+                mapping.get(
+                    "bytes_transferred"
+                )
+            )
+            if (
+                byte_mode
+                == "Map one source column"
+            )
+            else bool(
+                bytes_sent_column
+                and bytes_received_column
+            )
+        ),
+    }
+
+    resolved_count = sum(
+        explicitly_resolved.values()
+    )
+
+    unresolved_fields = [
+        field
+        for field, resolved
+        in explicitly_resolved.items()
+        if not resolved
+    ]
+
+    # Prevent accidental reuse of one source column
+    # for different semantic model fields.
+    source_usage = []
+
+    for field in [
+        "protocol",
+        "action",
+        "log_type",
+        "user_agent",
+        "request_path",
+    ]:
+        source_column = mapping.get(
+            field
+        )
+
+        if source_column:
+            source_usage.append(
+                source_column
+            )
+
+    if (
+        byte_mode
+        == "Map one source column"
+    ):
+        if mapping.get(
+            "bytes_transferred"
+        ):
+            source_usage.append(
+                mapping[
+                    "bytes_transferred"
+                ]
+            )
+
+    else:
+        if bytes_sent_column:
+            source_usage.append(
+                bytes_sent_column
+            )
+
+        if bytes_received_column:
+            source_usage.append(
+                bytes_received_column
+            )
+
+    duplicate_columns = sorted(
+        {
+            column
+            for column
+            in source_usage
+            if source_usage.count(
+                column
+            ) > 1
+        }
+    )
+
+    mapped_df = pd.DataFrame()
+
+    try:
+        mapped_df = (
+            build_mapped_dataframe(
+                source_df=df,
+                mapping=mapping,
+                bytes_sent_column=(
+                    bytes_sent_column
+                ),
+                bytes_received_column=(
+                    bytes_received_column
+                ),
+            )
+        )
+
+        mapping_validation = (
+            validate_mapping(
+                mapped_df
+            )
+        )
+
+    except Exception as exc:
+        mapping_validation = {
+            "ready": False,
+            "resolved_count": (
+                resolved_count
+            ),
+            "total_fields": len(
+                MODEL_FIELDS
+            ),
+            "missing_fields": (
+                unresolved_fields
+            ),
+            "errors": [
+                (
+                    f"{type(exc).__name__}: "
+                    f"{exc}"
+                )
+            ],
+            "warnings": [],
+        }
+
+    if mapping_validation is None:
+        mapping_validation = {
+            "ready": False,
+            "resolved_count": (
+                resolved_count
+            ),
+            "total_fields": len(
+                MODEL_FIELDS
+            ),
+            "missing_fields": (
+                unresolved_fields
+            ),
+            "errors": [],
+            "warnings": [],
+        }
+
+    # The mapper must use explicit mappings.
+    mapping_validation[
+        "resolved_count"
+    ] = resolved_count
+
+    mapping_validation[
+        "missing_fields"
+    ] = unresolved_fields
+
+    if unresolved_fields:
+        mapping_validation[
+            "errors"
+        ].append(
+            "Unresolved HUNT-LITE fields: "
+            + ", ".join(
+                unresolved_fields
+            )
+        )
+
+    if duplicate_columns:
+        mapping_validation[
+            "errors"
+        ].append(
+            "A source column cannot be reused for "
+            "multiple HUNT-LITE fields: "
+            + ", ".join(
+                duplicate_columns
+            )
+        )
+
+    mapping_ready = (
+        resolved_count
+        == len(MODEL_FIELDS)
+        and not duplicate_columns
+        and len(
+            mapping_validation[
+                "errors"
+            ]
+        )
+        == 0
+    )
+
+    mapping_validation[
+        "ready"
+    ] = mapping_ready
+
+    # -----------------------------------------------------
+    # Mapping summary
+    # -----------------------------------------------------
+
+    mapping_rows = []
+
+    for field in MODEL_FIELDS:
+        if (
+            field
+            == "bytes_transferred"
+            and byte_mode
+            == "Derive from sent + received columns"
+        ):
+            if (
+                bytes_sent_column
+                and bytes_received_column
+            ):
+                source_description = (
+                    f"{bytes_sent_column} + "
+                    f"{bytes_received_column}"
+                )
+
+                method = "Derived"
+
+            else:
+                source_description = (
+                    "Not mapped"
+                )
+
+                method = "Missing"
+
+        else:
+            source_column = mapping.get(
+                field
+            )
+
+            if source_column:
+                source_description = (
+                    source_column
+                )
+
+                method = "Direct"
+
+            else:
+                source_description = (
+                    "Not mapped"
+                )
+
+                method = "Missing"
+
+        mapping_rows.append(
+            {
+                "HUNT-LITE field": (
+                    field
+                ),
+                "Source": (
+                    source_description
+                ),
+                "Method": method,
+            }
+        )
+
+    st.markdown(
+        "### Mapping Summary"
+    )
+
+    st.dataframe(
+        pd.DataFrame(
+            mapping_rows
+        ),
+        use_container_width=True,
+        hide_index=True,
+    )
+
+    status_left, status_right = (
+        st.columns(2)
+    )
+
+    status_left.metric(
+        "Resolved Model Fields",
+        f"{resolved_count}/"
+        f"{len(MODEL_FIELDS)}",
+    )
+
+    status_right.metric(
+        "ML Triage Status",
+        (
+            "Enabled"
+            if mapping_ready
+            else "Blocked"
+        ),
+    )
+
+    for warning in (
+        mapping_validation.get(
+            "warnings",
+            []
+        )
+    ):
+        st.warning(
+            warning
+        )
+
+    for error in (
+        mapping_validation.get(
+            "errors",
+            []
+        )
+    ):
+        st.error(
+            error
+        )
+
+    canonical_preview_fields = [
+        field
+        for field in MODEL_FIELDS
+        if (
+            field
+            in mapped_df.columns
+            and explicitly_resolved.get(
+                field,
+                False,
+            )
+        )
+    ]
+
+    if canonical_preview_fields:
+        st.markdown(
+            "### Normalized HUNT-LITE Preview"
+        )
+
+        st.caption(
+            "This preview shows the canonical fields "
+            "prepared for the trained model. The original "
+            "external columns remain preserved for analyst "
+            "context and later evaluation."
+        )
+
+        st.dataframe(
+            mapped_df[
+                canonical_preview_fields
+            ].head(
+                min(
+                    10,
+                    len(mapped_df),
+                )
+            ),
+            use_container_width=True,
+        )
+
+    if mapping_ready:
+        triage_df = (
+            mapped_df.copy()
+        )
+
+        st.success(
+            "Schema validation passed: "
+            "6/6 HUNT-LITE model fields are "
+            "resolved and validated. "
+            "ML triage is enabled."
+        )
+
+    else:
+        triage_df = pd.DataFrame()
+
+        st.warning(
+            "ML triage is blocked until all six "
+            "HUNT-LITE model fields are resolved "
+            "and validation passes."
+        )
+
+
 st.divider()
+
 st.subheader("Run ML Triage")
+
+
+if (
+    "triage_results"
+    not in st.session_state
+):
+    st.session_state.triage_results = (
+        None
+    )
+
+
+run_disabled = (
+    data_option == "Upload CSV"
+    and uploaded is not None
+    and not mapping_ready
+)
 
 run_btn = st.button(
     "Run HUNT-LITE ML Triage",
     type="primary",
     use_container_width=True,
+    disabled=run_disabled,
 )
 
 
-if "triage_results" not in st.session_state:
-    st.session_state.triage_results = None
+if run_disabled:
+    st.caption(
+        "Resolve and validate all 6/6 "
+        "model fields to enable ML triage."
+    )
 
 
 if run_btn:
     if df.empty:
-        st.warning("No data loaded yet.")
-
-    else:
-        st.session_state.triage_results = (
-            run_triage(df)
+        st.warning(
+            "No data loaded yet."
         )
 
+    elif (
+        data_option == "Upload CSV"
+        and not mapping_ready
+    ):
+        st.warning(
+            "External dataset schema validation "
+            "has not passed."
+        )
 
-results = st.session_state.triage_results
+    else:
+        try:
+            input_df = (
+                triage_df
+                if data_option
+                == "Upload CSV"
+                else df
+            )
+
+            st.session_state.triage_results = (
+                run_triage(
+                    input_df
+                )
+            )
+
+        except Exception as exc:
+            st.session_state.triage_results = (
+                None
+            )
+
+            st.error(
+                "ML triage failed: "
+                f"{type(exc).__name__}: "
+                f"{exc}"
+            )
+
+
+results = (
+    st.session_state.triage_results
+)
+
+# Do not display stale previous results while an
+# external dataset currently fails the mapping gate.
+if (
+    data_option == "Upload CSV"
+    and uploaded is not None
+    and not mapping_ready
+):
+    results = None
 
 
 if results:
