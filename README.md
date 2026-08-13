@@ -20,8 +20,16 @@ Project Overview
 
 HUNT-LITE simulates a simplified SOC workflow where security logs are analyzed by a trained machine learning model and then triaged through an analyst-style interface.
 
+Prepared HUNT-LITE data follows this workflow:
+
 ```text
 Dataset -> ML Model -> Triage Engine -> SOC Dashboard -> AI Coach -> Incident Report
+```
+
+Compatible external CSV data follows a controlled mapping workflow:
+
+```text
+External CSV -> Schema Mapper -> Validation -> ML Model -> Triage Engine -> SOC Dashboard -> AI Coach
 ```
 
 Core components:
@@ -59,6 +67,44 @@ benign
 suspicious
 malicious
 ```
+
+---
+
+External Dataset Support
+
+HUNT-LITE can also evaluate compatible external security-log CSV files without retraining the existing model.
+
+The controlled schema mapper requires six model inputs:
+
+```text
+protocol
+action
+log_type
+bytes_transferred
+user_agent
+request_path
+```
+
+External column names do not have to match the HUNT-LITE names exactly. The mapper allows the user to inspect the uploaded schema and explicitly map compatible source fields into the six required model fields.
+
+Supported transformations include:
+
+- Known semantic column aliases
+- Protocol normalization
+- Controlled action normalization
+- Controlled log-type normalization
+- Direct bytes-transferred mapping
+- Derivation of bytes transferred by summing sent and received byte fields
+- Request-path extraction from compatible URL values
+- Preservation of the original external columns for analyst review
+
+All six model fields must be resolved before ML triage is enabled.
+
+HUNT-LITE intentionally blocks incomplete or semantically incompatible mappings rather than silently filling missing model inputs with fabricated blank or zero values.
+
+External labels, when present, are not used to manufacture HUNT-LITE model inputs.
+
+The schema mapper addresses input compatibility only. Successful mapping and model inference on an external dataset do not establish that the model is accurate on that dataset. Prediction quality depends on how closely the external data distribution and semantics match the data used to train the model.
 
 ---
 
@@ -165,7 +211,14 @@ The AI Coach can help explain:
 - Which indicators deserve attention
 - What the analyst should investigate next
 
-The current AI Coach requires valid OpenAI credentials. Additional no-key and fallback behavior is being developed as part of the capstone hardening process.
+The AI Coach provides two operating modes:
+
+- Local Coach - deterministic investigation guidance that requires no API key or external service
+- OpenAI Coach - optional LLM-assisted guidance using a user-provided session key or a locally configured OpenAI API key
+
+If OpenAI credentials are missing or the external request fails, HUNT-LITE falls back to the Local Coach so the core investigation workflow remains usable.
+
+The OpenAI Coach treats telemetry as untrusted input and is instructed not to invent evidence, treat model predictions as proof of compromise, or follow instructions embedded inside log data.
 
 Step 6 - Incident Reporting
 
@@ -342,6 +395,31 @@ RESULT: PASS — HUNT-LITE core workflow smoke test completed
 
 ---
 
+Schema Mapper Test
+
+The controlled external-dataset mapper has a standalone regression test:
+
+```bash
+python scripts/schema_mapper_test.py
+```
+
+The test verifies that:
+
+- A compatible external schema resolves all 6 required model fields
+- Protocol, action, and log-type normalization work as expected
+- Sent and received byte fields can be derived into bytes_transferred
+- Original external columns are preserved
+- An incomplete 5/6 mapping is rejected
+- The missing model field is reported rather than silently fabricated
+
+A successful run ends with:
+
+```text
+RESULT: PASS — controlled schema mapper regression test completed
+```
+
+---
+
 Running HUNT-LITE
 
 Start the Streamlit application:
@@ -369,7 +447,8 @@ Recommended first-time setup sequence:
 6. Run the downloader again and choose Option 3
 7. Run verify_assets.py
 8. Run smoke_test.py
-9. Start the Streamlit application
+9. Run schema_mapper_test.py
+10. Start the Streamlit application
 ```
 
 ---
@@ -379,6 +458,22 @@ Dashboard
 Dataset Preview
 
 Displays the currently loaded security records.
+
+External Dataset Schema Mapper
+
+When an external CSV is uploaded, HUNT-LITE displays the original schema and allows the user to map compatible source columns into the six required model inputs.
+
+The interface shows:
+
+- Required-field selections
+- Direct or derived byte mapping
+- Mapping summary
+- Resolved-field count
+- Normalized HUNT-LITE preview
+- Validation errors and warnings
+- Enabled or blocked ML triage status
+
+ML triage remains disabled until all six model fields have been resolved and validated.
 
 SOC Triage Dashboard
 
@@ -400,7 +495,9 @@ Allows the analyst to inspect an individual record and its model and triage resu
 
 AI Coach
 
-Provides additional investigation explanations and guidance when OpenAI credentials are available.
+Provides investigation explanations and guidance through either the no-key Local Coach or the optional OpenAI Coach.
+
+The OpenAI Coach can use a session-provided API key without requiring that key to be stored in the repository. If OpenAI is unavailable, HUNT-LITE can fall back to the Local Coach.
 
 Incident Report Generator
 
@@ -437,6 +534,7 @@ HUNT-LITE demonstrates concepts including:
 
 - Machine learning in cybersecurity
 - SOC triage workflows
+- Controlled external-log schema mapping
 - Threat investigation reasoning
 - AI-assisted analyst support
 - Security record review
