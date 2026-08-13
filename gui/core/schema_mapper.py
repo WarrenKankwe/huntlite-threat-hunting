@@ -297,6 +297,7 @@ def normalize_log_type(value):
         "waf",
         "web_application_firewall",
         "sg_http_service",
+        "sg_https_service",
     }:
         return "application"
 
