@@ -1,0 +1,29 @@
+{
+  "version": "2.6.2",
+  "release_version": "1.0",
+  "released_at": "",
+  "summary": {
+    "title": "HUNT-LITE Security Architecture and Threat Model",
+    "owner": "Warren Kankwe",
+    "description": "HUNT-LITE is a local Streamlit-based cybersecurity education and triage application that accepts built-in or user-uploaded CSV telemetry, validates and normalizes required fields, preprocesses security records, executes a frozen Keras classification model, applies deterministic triage logic, and presents analyst-oriented review and reporting functions. Guidance is provided through a deterministic Local Coach and an optional OpenAI Coach using a user-supplied or locally configured API key. User-controlled telemetry is treated as untrusted input, model and configuration assets remain local, and external communication is limited to the optional OpenAI API path. This threat model focuses on the trust boundaries and security controls relevant to potential public-network deployment.",
+    "id": 0
+  },
+  "detail": {
+    "contributors": [],
+    "diagrams": [
+      {
+        "id": 0,
+        "title": "HUNT-LITE Architecture and Trust Boundaries",
+        "diagramType": "STRIDE",
+        "placeholder": "New STRIDE diagram description",
+        "thumbnail": "./public/content/images/thumbnail.stride.jpg",
+        "version": "2.6.2",
+        "cells": [],
+        "description": "STRIDE data-flow diagram showing untrusted telemetry entry, local validation and ML triage, model and credential stores, analyst review, local and optional OpenAI coaching, reporting, and the trust boundaries between the user, local application, and external AI service."
+      }
+    ],
+    "diagramTop": 2,
+    "reviewer": "",
+    "threatTop": 0
+  }
+}
