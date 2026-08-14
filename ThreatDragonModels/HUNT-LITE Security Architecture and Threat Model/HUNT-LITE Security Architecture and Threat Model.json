@@ -18,7 +18,1761 @@
         "placeholder": "New STRIDE diagram description",
         "thumbnail": "./public/content/images/thumbnail.stride.jpg",
         "version": "2.6.2",
-        "cells": [],
+        "cells": [
+          {
+            "position": {
+              "x": -340,
+              "y": 40
+            },
+            "size": {
+              "width": 660,
+              "height": 1210
+            },
+            "attrs": {
+              "label": {
+                "text": "TB1 - HUNT-LITE Local Application Boundary"
+              }
+            },
+            "visible": true,
+            "shape": "trust-boundary-box",
+            "id": "527f0ba3-456b-43ef-b512-58f6401ddd8e",
+            "zIndex": -1,
+            "data": {
+              "type": "tm.BoundaryBox",
+              "name": "TB1 - HUNT-LITE Local Application Boundary",
+              "description": "Separates user-controlled input and external systems from trusted local HUNT-LITE execution. Uploaded or selected telemetry is treated as untrusted until validation and schema mapping succeed.",
+              "isTrustBoundary": true,
+              "hasOpenThreats": false,
+              "crossingFlows": [],
+              "containedElements": [
+                "01bba08f-fdd3-4685-bf30-48904363d577",
+                "bc31304b-2772-4828-aae4-cea19c80259b",
+                "e4eda44c-45d4-4e41-a44c-cbb36af182a9",
+                "09dec17c-4a27-4011-ab17-70ff6dae0184",
+                "3d18677e-cc7c-46da-8d90-9b651b877b25",
+                "fea19d9e-276e-4613-9aec-401396c03046",
+                "4086b72c-d465-439a-b47a-6208e44fb1fa",
+                "50b226f7-493e-4532-a4c9-27f87055ec16",
+                "128e4e48-3c78-4fe5-990f-c9880d18ee72",
+                "84ffa888-43e7-4d1f-bfea-52ecd9640ec6",
+                "fd0973d7-4862-4c23-9699-cdedf41b1a8b",
+                "b28d2505-508d-4e64-9c79-03f7977a3767"
+              ]
+            }
+          },
+          {
+            "position": {
+              "x": 390,
+              "y": 60.00000000000176
+            },
+            "size": {
+              "width": 140,
+              "height": 170
+            },
+            "attrs": {
+              "label": {
+                "text": "TB2 — External\nOpenAI Service\nBoundary"
+              }
+            },
+            "visible": true,
+            "shape": "trust-boundary-box",
+            "id": "36d44c55-42b7-431f-97b0-78d0da476df1",
+            "zIndex": -1,
+            "data": {
+              "type": "tm.BoundaryBox",
+              "name": "TB2 — External\nOpenAI Service\nBoundary",
+              "description": "Separates local HUNT-LITE execution from the optional external OpenAI service. Communication crosses the public network only when the OpenAI Coach is used.",
+              "isTrustBoundary": true,
+              "hasOpenThreats": false,
+              "crossingFlows": [],
+              "containedElements": [
+                "4df27c75-d673-4105-8711-43e5535b787c"
+              ]
+            }
+          },
+          {
+            "position": {
+              "x": -593,
+              "y": 85.00000000000176
+            },
+            "size": {
+              "width": 150,
+              "height": 80
+            },
+            "attrs": {
+              "text": {
+                "text": "User / Analyst"
+              },
+              "body": {
+                "stroke": "#333333",
+                "strokeWidth": 1.5,
+                "strokeDasharray": null
+              }
+            },
+            "visible": true,
+            "shape": "actor",
+            "ports": {
+              "groups": {
+                "top": {
+                  "position": "top",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "position": "right",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "bottom": {
+                  "position": "bottom",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "left": {
+                  "position": "left",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                }
+              },
+              "items": [
+                {
+                  "group": "top",
+                  "id": "ffd07fe6-7e72-4257-9fa6-4268f826288f"
+                },
+                {
+                  "group": "right",
+                  "id": "fef7aacf-6e11-49e5-bc40-86269d012873"
+                },
+                {
+                  "group": "bottom",
+                  "id": "53976caa-7cef-4aca-b93b-d896c52d7009"
+                },
+                {
+                  "group": "left",
+                  "id": "30ad5b49-970c-44fa-8fcf-976ec06ac6bd"
+                }
+              ]
+            },
+            "id": "361960ec-cf76-4ea2-b543-afd25f4b47a2",
+            "zIndex": 0,
+            "data": {
+              "type": "tm.Actor",
+              "name": "User / Analyst",
+              "description": "Human user who selects built-in telemetry or uploads CSV data, reviews triage results and alerts, requests analyst guidance, generates reports, and may optionally provide a session API key.",
+              "isTrustBoundary": false,
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "providesAuthentication": false,
+              "threats": []
+            }
+          },
+          {
+            "position": {
+              "x": -250.00000000000006,
+              "y": 90.00000000000176
+            },
+            "size": {
+              "width": 80,
+              "height": 70
+            },
+            "attrs": {
+              "text": {
+                "text": "Streamlit\nUI"
+              },
+              "body": {
+                "stroke": "#333333",
+                "strokeWidth": 1.5,
+                "strokeDasharray": null
+              }
+            },
+            "visible": true,
+            "shape": "process",
+            "ports": {
+              "groups": {
+                "top": {
+                  "position": "top",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "position": "right",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "bottom": {
+                  "position": "bottom",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "left": {
+                  "position": "left",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                }
+              },
+              "items": [
+                {
+                  "group": "top",
+                  "id": "32176812-f5a3-4287-a3b1-c3ec1ccbffd3"
+                },
+                {
+                  "group": "right",
+                  "id": "de6e4bd3-a71c-4cab-ba83-c40c177cc16f"
+                },
+                {
+                  "group": "bottom",
+                  "id": "6674764a-2ae3-4270-891d-3aeb64954294"
+                },
+                {
+                  "group": "left",
+                  "id": "e137cbd4-8096-4fa4-9b00-c14557cad217"
+                }
+              ]
+            },
+            "id": "01bba08f-fdd3-4685-bf30-48904363d577",
+            "zIndex": 1,
+            "data": {
+              "type": "tm.Process",
+              "name": "Streamlit\nUI",
+              "description": "Local user interface for selecting or uploading telemetry, initiating analysis, reviewing alerts and records, requesting coaching, and viewing generated reports.",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "handlesCardPayment": false,
+              "handlesGoodsOrServices": false,
+              "isWebApplication": true,
+              "privilegeLevel": "",
+              "threats": []
+            }
+          },
+          {
+            "position": {
+              "x": -280.00000000000006,
+              "y": 210.00000000000028
+            },
+            "size": {
+              "width": 140,
+              "height": 80
+            },
+            "attrs": {
+              "text": {
+                "text": "Input\nValidation &\nSchema\nMapping"
+              },
+              "body": {
+                "stroke": "#333333",
+                "strokeWidth": 1.5,
+                "strokeDasharray": null
+              }
+            },
+            "visible": true,
+            "shape": "process",
+            "ports": {
+              "groups": {
+                "top": {
+                  "position": "top",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "position": "right",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "bottom": {
+                  "position": "bottom",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "left": {
+                  "position": "left",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                }
+              },
+              "items": [
+                {
+                  "group": "top",
+                  "id": "32176812-f5a3-4287-a3b1-c3ec1ccbffd3"
+                },
+                {
+                  "group": "right",
+                  "id": "de6e4bd3-a71c-4cab-ba83-c40c177cc16f"
+                },
+                {
+                  "group": "bottom",
+                  "id": "6674764a-2ae3-4270-891d-3aeb64954294"
+                },
+                {
+                  "group": "left",
+                  "id": "e137cbd4-8096-4fa4-9b00-c14557cad217"
+                }
+              ]
+            },
+            "id": "bc31304b-2772-4828-aae4-cea19c80259b",
+            "zIndex": 2,
+            "data": {
+              "type": "tm.Process",
+              "name": "Input\nValidation &\nSchema\nMapping",
+              "description": "Fail-closed validation layer for uploaded telemetry. Enforces CSV parsing requirements, the required six-field schema or controlled schema mapping, semantic validation, and normalization before records reach the ML pipeline.",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "handlesCardPayment": false,
+              "handlesGoodsOrServices": false,
+              "isWebApplication": false,
+              "privilegeLevel": "",
+              "threats": []
+            }
+          },
+          {
+            "position": {
+              "x": -260.00000000000006,
+              "y": 330
+            },
+            "size": {
+              "width": 100,
+              "height": 110
+            },
+            "attrs": {
+              "text": {
+                "text": "ML\nPreprocessing"
+              },
+              "body": {
+                "stroke": "#333333",
+                "strokeWidth": 1.5,
+                "strokeDasharray": null
+              }
+            },
+            "visible": true,
+            "shape": "process",
+            "ports": {
+              "groups": {
+                "top": {
+                  "position": "top",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "position": "right",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "bottom": {
+                  "position": "bottom",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "left": {
+                  "position": "left",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                }
+              },
+              "items": [
+                {
+                  "group": "top",
+                  "id": "32176812-f5a3-4287-a3b1-c3ec1ccbffd3"
+                },
+                {
+                  "group": "right",
+                  "id": "de6e4bd3-a71c-4cab-ba83-c40c177cc16f"
+                },
+                {
+                  "group": "bottom",
+                  "id": "6674764a-2ae3-4270-891d-3aeb64954294"
+                },
+                {
+                  "group": "left",
+                  "id": "e137cbd4-8096-4fa4-9b00-c14557cad217"
+                }
+              ]
+            },
+            "id": "e4eda44c-45d4-4e41-a44c-cbb36af182a9",
+            "zIndex": 3,
+            "data": {
+              "type": "tm.Process",
+              "name": "ML\nPreprocessing",
+              "description": "Transforms validated and normalized telemetry into the encoded feature representation expected by the trained machine-learning model.",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "handlesCardPayment": false,
+              "handlesGoodsOrServices": false,
+              "isWebApplication": false,
+              "privilegeLevel": "",
+              "threats": []
+            }
+          },
+          {
+            "position": {
+              "x": -100,
+              "y": 410
+            },
+            "size": {
+              "width": 120,
+              "height": 60
+            },
+            "attrs": {
+              "text": {
+                "text": "Model / ML Artifacts"
+              },
+              "topLine": {
+                "strokeWidth": 1.5,
+                "strokeDasharray": null
+              },
+              "bottomLine": {
+                "strokeWidth": 1.5,
+                "strokeDasharray": null
+              }
+            },
+            "visible": true,
+            "shape": "store",
+            "ports": {
+              "groups": {
+                "top": {
+                  "position": "top",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "position": "right",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "bottom": {
+                  "position": "bottom",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "left": {
+                  "position": "left",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                }
+              },
+              "items": [
+                {
+                  "group": "top",
+                  "id": "67f26e87-aa87-4db0-b41e-c618ad32b9af"
+                },
+                {
+                  "group": "right",
+                  "id": "245ceedf-9aa4-44cd-8f29-6b28fe5a2b2f"
+                },
+                {
+                  "group": "bottom",
+                  "id": "adc553c4-365a-4d23-9125-2a0de9e85456"
+                },
+                {
+                  "group": "left",
+                  "id": "28671ed0-fb35-4558-a35b-ff817585db5e"
+                }
+              ]
+            },
+            "id": "09dec17c-4a27-4011-ab17-70ff6dae0184",
+            "zIndex": 4,
+            "data": {
+              "type": "tm.Store",
+              "name": "Model / ML Artifacts",
+              "description": "Local static machine-learning assets used for inference, including preprocessing artifacts, label mapping or encoder information, and the frozen trained Keras model.",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isALog": false,
+              "isEncrypted": false,
+              "isSigned": false,
+              "storesCredentials": false,
+              "storesInventory": false,
+              "threats": []
+            }
+          },
+          {
+            "position": {
+              "x": -255.00000000000006,
+              "y": 480
+            },
+            "size": {
+              "width": 90,
+              "height": 90
+            },
+            "attrs": {
+              "text": {
+                "text": "Frozen\nKeras\nModel"
+              },
+              "body": {
+                "stroke": "#333333",
+                "strokeWidth": 1.5,
+                "strokeDasharray": null
+              }
+            },
+            "visible": true,
+            "shape": "process",
+            "ports": {
+              "groups": {
+                "top": {
+                  "position": "top",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "position": "right",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "bottom": {
+                  "position": "bottom",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "left": {
+                  "position": "left",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                }
+              },
+              "items": [
+                {
+                  "group": "top",
+                  "id": "32176812-f5a3-4287-a3b1-c3ec1ccbffd3"
+                },
+                {
+                  "group": "right",
+                  "id": "de6e4bd3-a71c-4cab-ba83-c40c177cc16f"
+                },
+                {
+                  "group": "bottom",
+                  "id": "6674764a-2ae3-4270-891d-3aeb64954294"
+                },
+                {
+                  "group": "left",
+                  "id": "e137cbd4-8096-4fa4-9b00-c14557cad217"
+                }
+              ]
+            },
+            "id": "3d18677e-cc7c-46da-8d90-9b651b877b25",
+            "zIndex": 5,
+            "data": {
+              "type": "tm.Process",
+              "name": "Frozen\nKeras\nModel",
+              "description": "Runtime inference component that loads the trained model and produces classification scores or predictions from preprocessed telemetry. The model is used for assessment and prioritization rather than proof of compromise.",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "handlesCardPayment": false,
+              "handlesGoodsOrServices": false,
+              "isWebApplication": false,
+              "privilegeLevel": "",
+              "threats": []
+            }
+          },
+          {
+            "position": {
+              "x": -245.00000000000006,
+              "y": 620
+            },
+            "size": {
+              "width": 70,
+              "height": 80
+            },
+            "attrs": {
+              "text": {
+                "text": "Triage\nEngine"
+              },
+              "body": {
+                "stroke": "#333333",
+                "strokeWidth": 1.5,
+                "strokeDasharray": null
+              }
+            },
+            "visible": true,
+            "shape": "process",
+            "ports": {
+              "groups": {
+                "top": {
+                  "position": "top",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "position": "right",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "bottom": {
+                  "position": "bottom",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "left": {
+                  "position": "left",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                }
+              },
+              "items": [
+                {
+                  "group": "top",
+                  "id": "32176812-f5a3-4287-a3b1-c3ec1ccbffd3"
+                },
+                {
+                  "group": "right",
+                  "id": "de6e4bd3-a71c-4cab-ba83-c40c177cc16f"
+                },
+                {
+                  "group": "bottom",
+                  "id": "6674764a-2ae3-4270-891d-3aeb64954294"
+                },
+                {
+                  "group": "left",
+                  "id": "e137cbd4-8096-4fa4-9b00-c14557cad217"
+                }
+              ]
+            },
+            "id": "fea19d9e-276e-4613-9aec-401396c03046",
+            "zIndex": 6,
+            "data": {
+              "type": "tm.Process",
+              "name": "Triage\nEngine",
+              "description": "Combines model output with deterministic triage logic to assign prediction, confidence, severity, and review-queue information used by the analyst workflow.",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "handlesCardPayment": false,
+              "handlesGoodsOrServices": false,
+              "isWebApplication": false,
+              "privilegeLevel": "",
+              "threats": []
+            }
+          },
+          {
+            "position": {
+              "x": -180.0000000000001,
+              "y": 700
+            },
+            "size": {
+              "width": 110,
+              "height": 110
+            },
+            "attrs": {
+              "text": {
+                "text": "Analyst Review /\nRecord Detail"
+              },
+              "body": {
+                "stroke": "#333333",
+                "strokeWidth": 1.5,
+                "strokeDasharray": null
+              }
+            },
+            "visible": true,
+            "shape": "process",
+            "ports": {
+              "groups": {
+                "top": {
+                  "position": "top",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "position": "right",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "bottom": {
+                  "position": "bottom",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "left": {
+                  "position": "left",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                }
+              },
+              "items": [
+                {
+                  "group": "top",
+                  "id": "32176812-f5a3-4287-a3b1-c3ec1ccbffd3"
+                },
+                {
+                  "group": "right",
+                  "id": "de6e4bd3-a71c-4cab-ba83-c40c177cc16f"
+                },
+                {
+                  "group": "bottom",
+                  "id": "6674764a-2ae3-4270-891d-3aeb64954294"
+                },
+                {
+                  "group": "left",
+                  "id": "e137cbd4-8096-4fa4-9b00-c14557cad217"
+                }
+              ]
+            },
+            "id": "4086b72c-d465-439a-b47a-6208e44fb1fa",
+            "zIndex": 7,
+            "data": {
+              "type": "tm.Process",
+              "name": "Analyst Review /\nRecord Detail",
+              "description": "",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "handlesCardPayment": false,
+              "handlesGoodsOrServices": false,
+              "isWebApplication": false,
+              "privilegeLevel": "",
+              "threats": []
+            }
+          },
+          {
+            "position": {
+              "x": -255.00000000000006,
+              "y": 845
+            },
+            "size": {
+              "width": 90,
+              "height": 80
+            },
+            "attrs": {
+              "text": {
+                "text": "Local\nCoach"
+              },
+              "body": {
+                "stroke": "#333333",
+                "strokeWidth": 1.5,
+                "strokeDasharray": null
+              }
+            },
+            "visible": true,
+            "shape": "process",
+            "ports": {
+              "groups": {
+                "top": {
+                  "position": "top",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "position": "right",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "bottom": {
+                  "position": "bottom",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "left": {
+                  "position": "left",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                }
+              },
+              "items": [
+                {
+                  "group": "top",
+                  "id": "32176812-f5a3-4287-a3b1-c3ec1ccbffd3"
+                },
+                {
+                  "group": "right",
+                  "id": "de6e4bd3-a71c-4cab-ba83-c40c177cc16f"
+                },
+                {
+                  "group": "bottom",
+                  "id": "6674764a-2ae3-4270-891d-3aeb64954294"
+                },
+                {
+                  "group": "left",
+                  "id": "e137cbd4-8096-4fa4-9b00-c14557cad217"
+                }
+              ]
+            },
+            "id": "50b226f7-493e-4532-a4c9-27f87055ec16",
+            "zIndex": 8,
+            "data": {
+              "type": "tm.Process",
+              "name": "Local\nCoach",
+              "description": "Deterministic local guidance component that provides analyst-oriented explanation and investigation guidance without sending telemetry to an external service.",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "handlesCardPayment": false,
+              "handlesGoodsOrServices": false,
+              "isWebApplication": false,
+              "privilegeLevel": "",
+              "threats": []
+            }
+          },
+          {
+            "position": {
+              "x": -100,
+              "y": 840
+            },
+            "size": {
+              "width": 80,
+              "height": 90
+            },
+            "attrs": {
+              "text": {
+                "text": "OpenAI\nCoach"
+              },
+              "body": {
+                "stroke": "#333333",
+                "strokeWidth": 1.5,
+                "strokeDasharray": null
+              }
+            },
+            "visible": true,
+            "shape": "process",
+            "ports": {
+              "groups": {
+                "top": {
+                  "position": "top",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "position": "right",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "bottom": {
+                  "position": "bottom",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "left": {
+                  "position": "left",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                }
+              },
+              "items": [
+                {
+                  "group": "top",
+                  "id": "32176812-f5a3-4287-a3b1-c3ec1ccbffd3"
+                },
+                {
+                  "group": "right",
+                  "id": "de6e4bd3-a71c-4cab-ba83-c40c177cc16f"
+                },
+                {
+                  "group": "bottom",
+                  "id": "6674764a-2ae3-4270-891d-3aeb64954294"
+                },
+                {
+                  "group": "left",
+                  "id": "e137cbd4-8096-4fa4-9b00-c14557cad217"
+                }
+              ]
+            },
+            "id": "128e4e48-3c78-4fe5-990f-c9880d18ee72",
+            "zIndex": 9,
+            "data": {
+              "type": "tm.Process",
+              "name": "OpenAI\nCoach",
+              "description": "Optional local client that constructs a controlled prompt from selected telemetry and triage context, obtains an API credential from the permitted session or local configuration source, and communicates with the external OpenAI API.",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "handlesCardPayment": false,
+              "handlesGoodsOrServices": false,
+              "isWebApplication": false,
+              "privilegeLevel": "",
+              "threats": []
+            }
+          },
+          {
+            "position": {
+              "x": 66,
+              "y": 855
+            },
+            "size": {
+              "width": 120,
+              "height": 60
+            },
+            "attrs": {
+              "text": {
+                "text": "Local Credential /\nConfiguration"
+              },
+              "topLine": {
+                "strokeWidth": 1.5,
+                "strokeDasharray": null
+              },
+              "bottomLine": {
+                "strokeWidth": 1.5,
+                "strokeDasharray": null
+              }
+            },
+            "visible": true,
+            "shape": "store",
+            "ports": {
+              "groups": {
+                "top": {
+                  "position": "top",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "position": "right",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "bottom": {
+                  "position": "bottom",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "left": {
+                  "position": "left",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                }
+              },
+              "items": [
+                {
+                  "group": "top",
+                  "id": "67f26e87-aa87-4db0-b41e-c618ad32b9af"
+                },
+                {
+                  "group": "right",
+                  "id": "245ceedf-9aa4-44cd-8f29-6b28fe5a2b2f"
+                },
+                {
+                  "group": "bottom",
+                  "id": "adc553c4-365a-4d23-9125-2a0de9e85456"
+                },
+                {
+                  "group": "left",
+                  "id": "28671ed0-fb35-4558-a35b-ff817585db5e"
+                }
+              ]
+            },
+            "id": "84ffa888-43e7-4d1f-bfea-52ecd9640ec6",
+            "zIndex": 10,
+            "data": {
+              "type": "tm.Store",
+              "name": "Local Credential /\nConfiguration",
+              "description": "Optional local configuration source for OPENAI_API_KEY and OpenAI model settings. Repository-distributed files do not contain real credentials. A session-entered API key is transient and is not part of telemetry.",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isALog": false,
+              "isEncrypted": false,
+              "isSigned": false,
+              "storesCredentials": true,
+              "storesInventory": false,
+              "threats": []
+            }
+          },
+          {
+            "position": {
+              "x": -270.00000000000006,
+              "y": 968
+            },
+            "size": {
+              "width": 120,
+              "height": 110
+            },
+            "attrs": {
+              "text": {
+                "text": "Report Engine /\nAnalyst Notes"
+              },
+              "body": {
+                "stroke": "#333333",
+                "strokeWidth": 1.5,
+                "strokeDasharray": null
+              }
+            },
+            "visible": true,
+            "shape": "process",
+            "ports": {
+              "groups": {
+                "top": {
+                  "position": "top",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "position": "right",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "bottom": {
+                  "position": "bottom",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "left": {
+                  "position": "left",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                }
+              },
+              "items": [
+                {
+                  "group": "top",
+                  "id": "32176812-f5a3-4287-a3b1-c3ec1ccbffd3"
+                },
+                {
+                  "group": "right",
+                  "id": "de6e4bd3-a71c-4cab-ba83-c40c177cc16f"
+                },
+                {
+                  "group": "bottom",
+                  "id": "6674764a-2ae3-4270-891d-3aeb64954294"
+                },
+                {
+                  "group": "left",
+                  "id": "e137cbd4-8096-4fa4-9b00-c14557cad217"
+                }
+              ]
+            },
+            "id": "fd0973d7-4862-4c23-9699-cdedf41b1a8b",
+            "zIndex": 11,
+            "data": {
+              "type": "tm.Process",
+              "name": "Report Engine /\nAnalyst Notes",
+              "description": "Generates analyst-oriented notes, incident summaries, and reporting output from analyzed records and available investigation context.",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "handlesCardPayment": false,
+              "handlesGoodsOrServices": false,
+              "isWebApplication": false,
+              "privilegeLevel": "",
+              "threats": []
+            }
+          },
+          {
+            "position": {
+              "x": 430,
+              "y": 140.00000000000176
+            },
+            "size": {
+              "width": 60,
+              "height": 50
+            },
+            "attrs": {
+              "text": {
+                "text": "OpenAI\nAPI"
+              },
+              "body": {
+                "stroke": "#333333",
+                "strokeWidth": 1.5,
+                "strokeDasharray": null
+              }
+            },
+            "visible": true,
+            "shape": "actor",
+            "ports": {
+              "groups": {
+                "top": {
+                  "position": "top",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "position": "right",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "bottom": {
+                  "position": "bottom",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "left": {
+                  "position": "left",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                }
+              },
+              "items": [
+                {
+                  "group": "top",
+                  "id": "ffd07fe6-7e72-4257-9fa6-4268f826288f"
+                },
+                {
+                  "group": "right",
+                  "id": "fef7aacf-6e11-49e5-bc40-86269d012873"
+                },
+                {
+                  "group": "bottom",
+                  "id": "53976caa-7cef-4aca-b93b-d896c52d7009"
+                },
+                {
+                  "group": "left",
+                  "id": "30ad5b49-970c-44fa-8fcf-976ec06ac6bd"
+                }
+              ]
+            },
+            "id": "4df27c75-d673-4105-8711-43e5535b787c",
+            "zIndex": 12,
+            "data": {
+              "type": "tm.Actor",
+              "name": "OpenAI\nAPI",
+              "description": "Optional external AI service used by the OpenAI Coach. Receives a controlled prompt containing selected telemetry and contextual information and returns explanatory output.",
+              "isTrustBoundary": false,
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "providesAuthentication": false,
+              "threats": []
+            }
+          },
+          {
+            "position": {
+              "x": -250.00000000000006,
+              "y": 1130
+            },
+            "size": {
+              "width": 80,
+              "height": 90
+            },
+            "attrs": {
+              "text": {
+                "text": "Streamlit\nUI"
+              },
+              "body": {
+                "stroke": "#333333",
+                "strokeWidth": 1.5,
+                "strokeDasharray": null
+              }
+            },
+            "visible": true,
+            "shape": "process",
+            "ports": {
+              "groups": {
+                "top": {
+                  "position": "top",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "position": "right",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "bottom": {
+                  "position": "bottom",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "left": {
+                  "position": "left",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                }
+              },
+              "items": [
+                {
+                  "group": "top",
+                  "id": "32176812-f5a3-4287-a3b1-c3ec1ccbffd3"
+                },
+                {
+                  "group": "right",
+                  "id": "de6e4bd3-a71c-4cab-ba83-c40c177cc16f"
+                },
+                {
+                  "group": "bottom",
+                  "id": "6674764a-2ae3-4270-891d-3aeb64954294"
+                },
+                {
+                  "group": "left",
+                  "id": "e137cbd4-8096-4fa4-9b00-c14557cad217"
+                }
+              ]
+            },
+            "id": "b28d2505-508d-4e64-9c79-03f7977a3767",
+            "zIndex": 13,
+            "data": {
+              "type": "tm.Process",
+              "name": "Streamlit\nUI",
+              "description": "Local user interface for selecting or uploading telemetry, initiating analys",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "handlesCardPayment": false,
+              "handlesGoodsOrServices": false,
+              "isWebApplication": false,
+              "privilegeLevel": "",
+              "threats": []
+            }
+          }
+        ],
         "description": "STRIDE data-flow diagram showing untrusted telemetry entry, local validation and ML triage, model and credential stores, analyst review, local and optional OpenAI coaching, reporting, and the trust boundaries between the user, local application, and external AI service."
       }
     ],
