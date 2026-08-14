@@ -35,8 +35,8 @@
             },
             "visible": true,
             "shape": "trust-boundary-box",
-            "id": "527f0ba3-456b-43ef-b512-58f6401ddd8e",
             "zIndex": -1,
+            "id": "527f0ba3-456b-43ef-b512-58f6401ddd8e",
             "data": {
               "type": "tm.BoundaryBox",
               "name": "TB1 - HUNT-LITE Local Application Boundary",
@@ -57,7 +57,7 @@
                 "5135fbab-6200-457e-ad88-0daf6582e284",
                 "07047790-95a9-4368-8738-6e143eaa1c5f",
                 "85b9bae4-ff1f-4cf0-95fb-18767cd14112",
-                "b265498f-9557-4fe6-a114-2880d449d6ab"
+                "8486b1c7-21d8-4101-8fcb-a1659db10186"
               ],
               "containedElements": [
                 "01bba08f-fdd3-4685-bf30-48904363d577",
@@ -70,8 +70,7 @@
                 "50b226f7-493e-4532-a4c9-27f87055ec16",
                 "128e4e48-3c78-4fe5-990f-c9880d18ee72",
                 "84ffa888-43e7-4d1f-bfea-52ecd9640ec6",
-                "fd0973d7-4862-4c23-9699-cdedf41b1a8b",
-                "b28d2505-508d-4e64-9c79-03f7977a3767"
+                "fd0973d7-4862-4c23-9699-cdedf41b1a8b"
               ]
             }
           },
@@ -91,8 +90,8 @@
             },
             "visible": true,
             "shape": "trust-boundary-box",
-            "id": "36d44c55-42b7-431f-97b0-78d0da476df1",
             "zIndex": -1,
+            "id": "36d44c55-42b7-431f-97b0-78d0da476df1",
             "data": {
               "type": "tm.BoundaryBox",
               "name": "TB2 — External\nOpenAI Service\nBoundary",
@@ -128,6 +127,7 @@
             },
             "visible": true,
             "shape": "actor",
+            "zIndex": 0,
             "ports": {
               "groups": {
                 "top": {
@@ -211,7 +211,6 @@
               ]
             },
             "id": "361960ec-cf76-4ea2-b543-afd25f4b47a2",
-            "zIndex": 0,
             "data": {
               "type": "tm.Actor",
               "name": "User / Analyst",
@@ -245,6 +244,7 @@
             },
             "visible": true,
             "shape": "process",
+            "zIndex": 1,
             "ports": {
               "groups": {
                 "top": {
@@ -328,7 +328,6 @@
               ]
             },
             "id": "01bba08f-fdd3-4685-bf30-48904363d577",
-            "zIndex": 1,
             "data": {
               "type": "tm.Process",
               "name": "Streamlit\nUI",
@@ -365,6 +364,7 @@
             },
             "visible": true,
             "shape": "process",
+            "zIndex": 2,
             "ports": {
               "groups": {
                 "top": {
@@ -448,7 +448,6 @@
               ]
             },
             "id": "bc31304b-2772-4828-aae4-cea19c80259b",
-            "zIndex": 2,
             "data": {
               "type": "tm.Process",
               "name": "Input\nValidation &\nSchema\nMapping",
@@ -485,6 +484,7 @@
             },
             "visible": true,
             "shape": "process",
+            "zIndex": 3,
             "ports": {
               "groups": {
                 "top": {
@@ -568,7 +568,6 @@
               ]
             },
             "id": "e4eda44c-45d4-4e41-a44c-cbb36af182a9",
-            "zIndex": 3,
             "data": {
               "type": "tm.Process",
               "name": "ML\nPreprocessing",
@@ -608,6 +607,7 @@
             },
             "visible": true,
             "shape": "store",
+            "zIndex": 4,
             "ports": {
               "groups": {
                 "top": {
@@ -691,7 +691,6 @@
               ]
             },
             "id": "09dec17c-4a27-4011-ab17-70ff6dae0184",
-            "zIndex": 4,
             "data": {
               "type": "tm.Store",
               "name": "Model / ML Artifacts",
@@ -729,6 +728,7 @@
             },
             "visible": true,
             "shape": "process",
+            "zIndex": 5,
             "ports": {
               "groups": {
                 "top": {
@@ -812,7 +812,6 @@
               ]
             },
             "id": "3d18677e-cc7c-46da-8d90-9b651b877b25",
-            "zIndex": 5,
             "data": {
               "type": "tm.Process",
               "name": "Frozen\nKeras\nModel",
@@ -849,6 +848,7 @@
             },
             "visible": true,
             "shape": "process",
+            "zIndex": 6,
             "ports": {
               "groups": {
                 "top": {
@@ -932,7 +932,6 @@
               ]
             },
             "id": "fea19d9e-276e-4613-9aec-401396c03046",
-            "zIndex": 6,
             "data": {
               "type": "tm.Process",
               "name": "Triage\nEngine",
@@ -969,6 +968,7 @@
             },
             "visible": true,
             "shape": "process",
+            "zIndex": 7,
             "ports": {
               "groups": {
                 "top": {
@@ -1052,7 +1052,6 @@
               ]
             },
             "id": "4086b72c-d465-439a-b47a-6208e44fb1fa",
-            "zIndex": 7,
             "data": {
               "type": "tm.Process",
               "name": "Analyst Review /\nRecord Detail",
@@ -1089,6 +1088,7 @@
             },
             "visible": true,
             "shape": "process",
+            "zIndex": 8,
             "ports": {
               "groups": {
                 "top": {
@@ -1172,7 +1172,6 @@
               ]
             },
             "id": "50b226f7-493e-4532-a4c9-27f87055ec16",
-            "zIndex": 8,
             "data": {
               "type": "tm.Process",
               "name": "Local\nCoach",
@@ -1209,6 +1208,7 @@
             },
             "visible": true,
             "shape": "process",
+            "zIndex": 9,
             "ports": {
               "groups": {
                 "top": {
@@ -1292,7 +1292,6 @@
               ]
             },
             "id": "128e4e48-3c78-4fe5-990f-c9880d18ee72",
-            "zIndex": 9,
             "data": {
               "type": "tm.Process",
               "name": "OpenAI\nCoach",
@@ -1332,6 +1331,7 @@
             },
             "visible": true,
             "shape": "store",
+            "zIndex": 10,
             "ports": {
               "groups": {
                 "top": {
@@ -1415,7 +1415,6 @@
               ]
             },
             "id": "84ffa888-43e7-4d1f-bfea-52ecd9640ec6",
-            "zIndex": 10,
             "data": {
               "type": "tm.Store",
               "name": "Local Credential /\nConfiguration",
@@ -2234,7 +2233,7 @@
             "connector": "smooth",
             "data": {
               "type": "tm.Flow",
-              "name": "Report",
+              "name": "Results",
               "description": "",
               "outOfScope": false,
               "isTrustBoundary": false,
@@ -2245,22 +2244,26 @@
               "isPublicNetwork": false,
               "protocol": "",
               "threats": [],
-              "trustBoundaryIds": [
-                "527f0ba3-456b-43ef-b512-58f6401ddd8e"
-              ]
+              "trustBoundaryIds": []
             },
             "labels": [
-              "Report"
+              "Results"
             ],
-            "id": "b265498f-9557-4fe6-a114-2880d449d6ab",
+            "id": "d85b8293-0cdf-42b3-b431-615c00242afa",
             "source": {
-              "x": -205,
-              "y": 1078
+              "x": -220,
+              "y": 95
             },
             "target": {
-              "cell": "b28d2505-508d-4e64-9c79-03f7977a3767",
-              "port": "32176812-f5a3-4287-a3b1-c3ec1ccbffd3"
-            }
+              "cell": "361960ec-cf76-4ea2-b543-afd25f4b47a2",
+              "port": "ffd07fe6-7e72-4257-9fa6-4268f826288f"
+            },
+            "vertices": [
+              {
+                "x": -390,
+                "y": 30
+              }
+            ]
           },
           {
             "shape": "flow",
@@ -2293,20 +2296,28 @@
               "isPublicNetwork": false,
               "protocol": "",
               "threats": [],
-              "trustBoundaryIds": []
+              "trustBoundaryIds": [
+                "527f0ba3-456b-43ef-b512-58f6401ddd8e"
+              ]
             },
             "labels": [
               "Results"
             ],
             "id": "8486b1c7-21d8-4101-8fcb-a1659db10186",
             "source": {
-              "x": -250,
-              "y": 1170
+              "cell": "fd0973d7-4862-4c23-9699-cdedf41b1a8b",
+              "port": "e137cbd4-8096-4fa4-9b00-c14557cad217"
             },
             "target": {
               "cell": "361960ec-cf76-4ea2-b543-afd25f4b47a2",
               "port": "53976caa-7cef-4aca-b93b-d896c52d7009"
-            }
+            },
+            "vertices": [
+              {
+                "x": -360,
+                "y": 840
+              }
+            ]
           },
           {
             "position": {
@@ -2329,6 +2340,7 @@
             },
             "visible": true,
             "shape": "process",
+            "zIndex": 11,
             "ports": {
               "groups": {
                 "top": {
@@ -2412,7 +2424,6 @@
               ]
             },
             "id": "fd0973d7-4862-4c23-9699-cdedf41b1a8b",
-            "zIndex": 11,
             "data": {
               "type": "tm.Process",
               "name": "Report Engine /\nAnalyst Notes",
@@ -2449,6 +2460,7 @@
             },
             "visible": true,
             "shape": "actor",
+            "zIndex": 12,
             "ports": {
               "groups": {
                 "top": {
@@ -2532,7 +2544,6 @@
               ]
             },
             "id": "4df27c75-d673-4105-8711-43e5535b787c",
-            "zIndex": 12,
             "data": {
               "type": "tm.Actor",
               "name": "OpenAI\nAPI",
@@ -2542,126 +2553,6 @@
               "reasonOutOfScope": "",
               "hasOpenThreats": false,
               "providesAuthentication": false,
-              "threats": []
-            }
-          },
-          {
-            "position": {
-              "x": -250.00000000000006,
-              "y": 1130
-            },
-            "size": {
-              "width": 80,
-              "height": 90
-            },
-            "attrs": {
-              "text": {
-                "text": "Streamlit\nUI"
-              },
-              "body": {
-                "stroke": "#333333",
-                "strokeWidth": 1.5,
-                "strokeDasharray": null
-              }
-            },
-            "visible": true,
-            "shape": "process",
-            "ports": {
-              "groups": {
-                "top": {
-                  "position": "top",
-                  "attrs": {
-                    "circle": {
-                      "r": 4,
-                      "magnet": true,
-                      "stroke": "#5F95FF",
-                      "strokeWidth": 1,
-                      "fill": "#fff",
-                      "style": {
-                        "visibility": "hidden"
-                      }
-                    }
-                  }
-                },
-                "right": {
-                  "position": "right",
-                  "attrs": {
-                    "circle": {
-                      "r": 4,
-                      "magnet": true,
-                      "stroke": "#5F95FF",
-                      "strokeWidth": 1,
-                      "fill": "#fff",
-                      "style": {
-                        "visibility": "hidden"
-                      }
-                    }
-                  }
-                },
-                "bottom": {
-                  "position": "bottom",
-                  "attrs": {
-                    "circle": {
-                      "r": 4,
-                      "magnet": true,
-                      "stroke": "#5F95FF",
-                      "strokeWidth": 1,
-                      "fill": "#fff",
-                      "style": {
-                        "visibility": "hidden"
-                      }
-                    }
-                  }
-                },
-                "left": {
-                  "position": "left",
-                  "attrs": {
-                    "circle": {
-                      "r": 4,
-                      "magnet": true,
-                      "stroke": "#5F95FF",
-                      "strokeWidth": 1,
-                      "fill": "#fff",
-                      "style": {
-                        "visibility": "hidden"
-                      }
-                    }
-                  }
-                }
-              },
-              "items": [
-                {
-                  "group": "top",
-                  "id": "32176812-f5a3-4287-a3b1-c3ec1ccbffd3"
-                },
-                {
-                  "group": "right",
-                  "id": "de6e4bd3-a71c-4cab-ba83-c40c177cc16f"
-                },
-                {
-                  "group": "bottom",
-                  "id": "6674764a-2ae3-4270-891d-3aeb64954294"
-                },
-                {
-                  "group": "left",
-                  "id": "e137cbd4-8096-4fa4-9b00-c14557cad217"
-                }
-              ]
-            },
-            "id": "b28d2505-508d-4e64-9c79-03f7977a3767",
-            "zIndex": 13,
-            "data": {
-              "type": "tm.Process",
-              "name": "Streamlit\nUI",
-              "description": "Local user interface for selecting or uploading telemetry, initiating analys",
-              "outOfScope": false,
-              "isTrustBoundary": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "handlesCardPayment": false,
-              "handlesGoodsOrServices": false,
-              "isWebApplication": false,
-              "privilegeLevel": "",
               "threats": []
             }
           }
